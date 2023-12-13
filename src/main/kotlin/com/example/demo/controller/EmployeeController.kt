@@ -44,6 +44,12 @@ class EmployeeController(@Autowired private val employeeService : EmployeeServic
                     .body(e)
     }
 
+    // get employee by email
+    @GetMapping("employees/email/{email}")
+    fun getEmployeeByEmail(@PathVariable email : String) : Employee =
+            employeeService.getEmployeeByEmail(email) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "This employee does not exist")
+
     //creates a new employee
     @PostMapping("/employees")
     fun saveEmployees(@RequestBody employee : Employee) : ResponseEntity<Employee>   {

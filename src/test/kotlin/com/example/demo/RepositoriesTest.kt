@@ -30,4 +30,28 @@ class RepositoriesTest @Autowired constructor(
         assertThat(found?.lastname).isEqualTo(employee.lastname)
     }
 
+    @Test
+    fun `When findOneByEmail then return Employee`() {
+        // Given
+        val employee = Employee(1, "test@test.com", "firsttest", "secondtest")
+        userRepository.save(employee)
+
+        // When
+        val found = userRepository.findOneByEmail(employee.email)
+        assertThat(found?.email).isEqualTo(employee.email)
+    }
+
+    @Test
+    fun `When findOneEmail can not find then return null`() {
+        // Given
+        val employee = Employee(1, "test@test.com", "firsttest", "secondtest")
+        userRepository.save(employee)
+
+        // When
+        val res = userRepository.findOneByEmail("notfound@example.com")
+        assertThat(res).isNull()
+    }
+
+
+
 }

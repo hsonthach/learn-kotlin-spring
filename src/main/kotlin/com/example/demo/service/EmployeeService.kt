@@ -60,4 +60,8 @@ class EmployeeService(@Autowired private val employeeDao : EmployeeDao,
         return str.all { it.isLetter() }
     }
 
+    fun getEmployeeByEmail(email: String): Employee? {
+        return employeeDao.findOneByEmail(email)
+    }
+
 }

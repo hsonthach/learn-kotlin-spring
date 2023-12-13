@@ -12,4 +12,7 @@ interface EmployeeDao : JpaRepository<Employee, Long> {
     @Query("SELECT e FROM Employee e WHERE e.lastname LIKE '% %'")
     fun hasMultipleLastName(): List<Employee>
 
+    @Query("SELECT e FROM Employee e WHERE e.email = ?1")
+    fun findOneByEmail(email: String): Employee?
+
 }
